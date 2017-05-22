@@ -18,6 +18,10 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__ . '/../config/maki.php' => config_path('maki.php'),
         ], 'config');
+
+        $this->publishes([
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/maki'),
+        ], 'lang');
     }
 
     public function register()
