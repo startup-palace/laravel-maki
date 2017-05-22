@@ -13,6 +13,8 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
         $this->publishes([
             __DIR__ . '/../config/maki.php' => config_path('maki.php'),
         ], 'config');
