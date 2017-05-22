@@ -8,7 +8,10 @@ use StartupPalace\Maki\Section;
 
 class FieldValuesTest extends TestCase
 {
-    public function testConfig()
+    /**
+     * Test the `fieldValues` relation
+     */
+    public function testRelation()
     {
         $section = $this->createSectionAndFieldValues();
 

@@ -6,6 +6,9 @@ use StartupPalace\Maki\Section;
 
 class SectionsTest extends TestCase
 {
+    /**
+     * Tests section config
+     */
     public function testConfig()
     {
         $section = new Section([
@@ -16,13 +19,14 @@ class SectionsTest extends TestCase
         $this->assertEquals('wysiwyg', $section->fields['content']['type']);
     }
 
+    /**
+     * Tests view path for Maki templates
+     */
     public function testSectionTemplate()
     {
         $section = new Section([
             'type' => 'default',
         ]);
-
-        $this->assertEquals('default', $section->template);
 
         $this->assertEquals('maki.default', $section->getTemplateName());
 

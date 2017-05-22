@@ -3,9 +3,15 @@
 namespace StartupPalace\Maki;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kblais\Uuid\Uuid;
 use StartupPalace\Maki\FieldValue;
 
+/**
+ * Section model
+ * Table : sections
+ */
 class Section extends Model
 {
     use Uuid;
@@ -14,32 +20,47 @@ class Section extends Model
         'type', 'parent_id',
     ];
 
-    public function sections()
+    /**
+     * Describe the `sections` relation
+     * @return HasMany
+     */
+    public function sections() : HasMany
     {
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function parentSection()
+    /**
+     * Describe the `parentSection` relation
+     * @return BelongsTo
+     */
+    public function parentSection() : BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id');
     }
 
-    public function fieldValues()
+    /**
+     * Describe the `fieldValues` relation
+     * @return HasMany
+     */
+    public function fieldValues() : HasMany
     {
         return $this->hasMany(FieldValue::class);
     }
 
-    protected function getTypeConfig()
+    /**
+     * Get the section config depending on its type
+     * @return array
+     */
+    protected function getTypeConfig() : array
     {
         return array_get(config('maki.sectionTypes'), $this->type);
     }
 
-    public function getTemplateAttribute()
-    {
-        return $this->getTypeConfig()['template'];
-    }
-
-    public function getFieldsAttribute()
+    /**
+     * Get fields informations depending on the section type
+     * @return array
+     */
+    public function getFieldsAttribute() : array
     {
         return array_reduce(
             $this->getTypeConfig()['fields'],
@@ -52,8 +73,12 @@ class Section extends Model
         );
     }
 
-    public function getTemplateName()
+    /**
+     * Get the template full name
+     * @return string
+     */
+    public function getTemplateName() : string
     {
-        return config('maki.templatePath') . '.' . $this->template;
+        return config('maki.templatePath') . '.' . $this->getTypeConfig()['template'];
     }
 }

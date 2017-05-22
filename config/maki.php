@@ -1,7 +1,9 @@
 <?php
 
 return [
+    // Path to Maki's templates (from `resources/views`)
     'templatePath' => 'maki',
+    // Describe the field types use in your application
     'fields' => [
         'content' => [
             'type' => 'wysiwyg',
@@ -19,6 +21,7 @@ return [
             'type' => 'link',
         ],
     ],
+    // Describe the different section types used in your application
     'sectionTypes' => [
         'default' => [
             'template' => 'default',

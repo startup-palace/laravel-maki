@@ -13,6 +13,9 @@ class DatabaseTest extends TestCase
         $this->artisan('migrate', ['--database' => 'testbench']);
     }
 
+    /**
+     * Tests migrations are correctly executed
+     */
     public function testRunningMigration()
     {
         $this->assertTrue(Schema::hasTable('sections'));
