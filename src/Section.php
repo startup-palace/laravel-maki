@@ -24,6 +24,11 @@ class Section extends Model
         return $this->belongsTo(self::class, 'parent_id');
     }
 
+    public function fieldValues()
+    {
+        return $this->hasMany(FieldValue::class);
+    }
+
     protected function getTypeConfig()
     {
         return array_get(config('maki.sectionTypes'), $this->type);
