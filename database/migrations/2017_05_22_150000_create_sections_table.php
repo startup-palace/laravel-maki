@@ -15,7 +15,6 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->softDeletes();
             $table->string('type');
             $table->uuid('parent_id')->nullable();
         });

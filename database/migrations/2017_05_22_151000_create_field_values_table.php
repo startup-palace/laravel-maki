@@ -15,7 +15,6 @@ class CreateFieldValuesTable extends Migration
         Schema::create('field_values', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->softDeletes();
             $table->uuid('section_id');
             $table->string('field');
             $table->uuid('object_id')->nullable();
