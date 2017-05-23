@@ -45,19 +45,12 @@ class SectionsTest extends TestCase
         $this->assertEquals('changedTemplatePath.default', $section->getTemplateName());
     }
 
+    /**
+     * Tests sections HTML rendering
+     */
     public function testSectionRendering()
     {
-        $section = Section::create([
-            'type' => 'default',
-        ]);
-
-        $fieldValues = [
-            new FieldValue(['field' => 'title', 'data' => 'A simple title']),
-            new FieldValue(['field' => 'text', 'data' => 'A simple text']),
-            new FieldValue(['field' => 'content', 'data' => '<p>Some content</p>']),
-        ];
-
-        $section->fieldValues()->saveMany($fieldValues);
+        $section = $this->createSectionAndFieldValues();
 
         $this->assertContains('A simple title', (string) $section->render());
         $this->assertContains('A simple text', (string) $section->render());

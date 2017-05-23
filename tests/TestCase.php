@@ -3,6 +3,8 @@
 namespace StartupPalace\Maki\Tests;
 
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use StartupPalace\Maki\FieldValue;
+use StartupPalace\Maki\Section;
 
 class TestCase extends BaseTestCase
 {
@@ -31,5 +33,26 @@ class TestCase extends BaseTestCase
             \StartupPalace\Maki\ServiceProvider::class,
             \TwigBridge\ServiceProvider::class,
         ];
+    }
+
+    /**
+     * Create a default section and its fields
+     * @return Section
+     */
+    protected function createSectionAndFieldValues()
+    {
+        $section = Section::create([
+            'type' => 'default',
+        ]);
+
+        $fieldValues = [
+            new FieldValue(['field' => 'title', 'data' => 'A simple title']),
+            new FieldValue(['field' => 'text', 'data' => 'A simple text']),
+            new FieldValue(['field' => 'content', 'data' => '<p>Some content</p>']),
+        ];
+
+        $section->fieldValues()->saveMany($fieldValues);
+
+        return $section;
     }
 }

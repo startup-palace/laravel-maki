@@ -16,34 +16,10 @@ class FieldValuesTest extends TestCase
      */
     public function testRelation()
     {
-        $section = $this->makeSectionAndFieldValues();
+        $section = $this->createSectionAndFieldValues();
 
-        $this->assertEquals('A section title', $section->fieldValues->first()->data);
-
-        $section->save();
+        $this->assertEquals('A simple title', $section->fieldValues->first()->data);
 
         $this->assertTrue($section->exists);
-    }
-
-    protected function makeSectionAndFieldValues()
-    {
-        $section = new Section([
-            'type' => 'default',
-        ]);
-
-        $fieldValues = Collection::make([
-            new FieldValue([
-                'field' => 'title',
-                'data' => 'A section title',
-            ]),
-            new FieldValue([
-                'field' => 'content',
-                'data' => '<p>Some content</p><br><p>On multiple lines</p>',
-            ]),
-        ]);
-
-        $section->setRelation('fieldValues', $fieldValues);
-
-        return $section;
     }
 }
