@@ -20,12 +20,15 @@ class TestCase extends BaseTestCase
             'database' => ':memory:',
             'prefix'   => '',
         ]);
+
+        \View::addLocation(__DIR__ . '/../resources/views');
     }
 
     protected function getPackageProviders($app)
     {
         return [
             \StartupPalace\Maki\ServiceProvider::class,
+            \TwigBridge\ServiceProvider::class,
         ];
     }
 }
