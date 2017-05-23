@@ -2,6 +2,7 @@
 
 namespace StartupPalace\Maki;
 
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -14,7 +15,7 @@ use Kblais\Uuid\Uuid;
  * Section model
  * Table : sections
  */
-class Section extends Model
+class Section extends Model implements Htmlable
 {
     use Uuid;
 
@@ -97,5 +98,15 @@ class Section extends Model
     public function getTemplateName() : string
     {
         return config('maki.templatePath') . '.' . $this->getTypeConfig()['template'];
+    }
+
+    public function toHtml()
+    {
+        return (string) $this->render();
+    }
+
+    public function __toString()
+    {
+        return $this->toHtml();
     }
 }
