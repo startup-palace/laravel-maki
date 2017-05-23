@@ -62,5 +62,12 @@ class SectionsTest extends TestCase
         $this->assertContains('A simple title', (string) $section->render());
         $this->assertContains('A simple text', (string) $section->render());
         $this->assertContains('<p>Some content</p>', (string) $section->render());
+
+        $viewHtml = View::make('index', ['sections' => [$section]])->render();
+
+        $this->assertContains('<title>Maki - Test page</title>', $viewHtml);
+        $this->assertContains('A simple title', $viewHtml);
+        $this->assertContains('A simple text', $viewHtml);
+        $this->assertContains('<p>Some content</p>', $viewHtml);
     }
 }

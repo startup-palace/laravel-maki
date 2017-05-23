@@ -22,6 +22,7 @@ class TestCase extends BaseTestCase
         ]);
 
         \View::addLocation(__DIR__ . '/../resources/views');
+        \View::addLocation(__DIR__ . '/resources/views');
     }
 
     protected function getPackageProviders($app)
