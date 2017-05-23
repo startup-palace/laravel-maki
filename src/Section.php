@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\HtmlString;
 use Kblais\Uuid\Uuid;
 
 /**
@@ -56,6 +58,17 @@ class Section extends Model
         return array_get(config('maki.sectionTypes'), $this->type);
     }
 
+    public function render()
+    {
+        $view = $this->getTemplateName();
+
+        return new HtmlString(
+            View::make($view, [
+                'section' => $this,
+            ])->render()
+        );
+    }
+
     /**
      * Lists the fields of the section
      * @return array
@@ -66,8 +79,8 @@ class Section extends Model
 
         return collect($this->getTypeConfig()['fields'])
             ->map(function ($field) use ($existingFields) {
-                if (array_key_exists($field, $existingFields)) {
-                    return $existingFields[$field];
+                if ($existingFields->has($field)) {
+                    return $existingFields->get($field);
                 }
 
                 $fieldValueClass = config('maki.fieldValueClass');
