@@ -43,4 +43,18 @@ class FieldValue extends Model
     {
         return config('maki.fields')[$this->field];
     }
+
+    public function renderData()
+    {
+        if ($this->type === 'object') {
+            return $this->object;
+        }
+
+        return $this->data;
+    }
+
+    public function __toString() : string
+    {
+        return (string) $this->renderData();
+    }
 }
