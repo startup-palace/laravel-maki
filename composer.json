@@ -22,6 +22,12 @@
         "phpunit/phpunit": "^6.1",
         "orchestra/database": "^3.4"
     },
+    "scripts": {
+        "test": [
+            "./vendor/bin/phpunit",
+            "./vendor/bin/phpcs"
+        ]
+    },
     "autoload": {
         "psr-4": {
             "StartupPalace\\Maki\\": "src"
