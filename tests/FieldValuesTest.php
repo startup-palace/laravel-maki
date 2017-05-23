@@ -31,7 +31,11 @@ class FieldValuesTest extends TestCase
             ]),
             new FieldValue([
                 'field' => 'content',
-                'data' => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus dolorum esse rem vitae, quaerat asperiores eos sint iure commodi, velit praesentium temporibus, amet, ut molestiae.</p>',
+                'data' => <<<EOT
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus dolorum esse rem vitae, quaerat asperiores
+eos sint iure commodi, velit praesentium temporibus, amet, ut molestiae.</p>
+EOT
+                ,
             ]),
         ]);
 
