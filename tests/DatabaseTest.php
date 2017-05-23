@@ -2,16 +2,12 @@
 
 namespace StartupPalace\Maki\Tests;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Schema;
 
 class DatabaseTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->artisan('migrate', ['--database' => 'testbench']);
-    }
+    use DatabaseMigrations;
 
     /**
      * Tests migrations are correctly executed

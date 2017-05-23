@@ -2,10 +2,15 @@
 
 namespace StartupPalace\Maki\Tests;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use StartupPalace\Maki\FieldValue;
 use StartupPalace\Maki\Section;
+use StartupPalace\Maki\Tests\Models\Category;
 
 class SectionsTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /**
      * Tests section config
      */
@@ -15,8 +20,12 @@ class SectionsTest extends TestCase
             'type' => 'default',
         ]);
 
-        $this->assertArrayHasKey('title', $section->fields);
-        $this->assertEquals('wysiwyg', $section->fields['content']['type']);
+        $this->assertTrue($section->fields->contains(new FieldValue(['field' => 'title'])));
+        $this->assertEquals(
+            'wysiwyg',
+            $section->fields['content']
+                ->config['type']
+        );
     }
 
     /**

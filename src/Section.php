@@ -5,8 +5,8 @@ namespace StartupPalace\Maki;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Kblais\Uuid\Uuid;
-use StartupPalace\Maki\FieldValue;
 
 /**
  * Section model
@@ -44,7 +44,7 @@ class Section extends Model
      */
     public function fieldValues() : HasMany
     {
-        return $this->hasMany(FieldValue::class);
+        return $this->hasMany(config('maki.fieldValueClass'));
     }
 
     /**
@@ -57,20 +57,24 @@ class Section extends Model
     }
 
     /**
-     * Get fields informations depending on the section type
+     * Lists the fields of the section
      * @return array
      */
-    public function getFieldsAttribute() : array
+    public function getFieldsAttribute() : Collection
     {
-        return array_reduce(
-            $this->getTypeConfig()['fields'],
-            function ($acc, $field) {
-                $acc[$field] = config('maki.fields.' . $field);
+        $existingFields = $this->fieldValues->keyBy('field');
 
-                return $acc;
-            },
-            []
-        );
+        return collect($this->getTypeConfig()['fields'])
+            ->map(function ($field) use ($existingFields) {
+                if (array_key_exists($field, $existingFields)) {
+                    return $existingFields[$field];
+                }
+
+                $fieldValueClass = config('maki.fieldValueClass');
+
+                return new $fieldValueClass(compact('field'));
+            })
+            ->keyBy('field');
     }
 
     /**

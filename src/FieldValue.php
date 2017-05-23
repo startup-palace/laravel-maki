@@ -19,13 +19,15 @@ class FieldValue extends Model
         'section_id', 'field', 'data',
     ];
 
+    protected $with = ['object'];
+
     /**
      * Describe the `section` relation
      * @return BelongsToMany
      */
     public function section() : BelongsToMany
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(config('maki.sectionClass'));
     }
 
     /**
@@ -35,5 +37,10 @@ class FieldValue extends Model
     public function object() : MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function getConfigAttribute() : array
+    {
+        return config('maki.fields')[$this->field];
     }
 }
