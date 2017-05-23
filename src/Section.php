@@ -59,6 +59,10 @@ class Section extends Model implements Htmlable
         return array_get(config('maki.sectionTypes'), $this->type);
     }
 
+    /**
+     * Render the HTML from the view
+     * @return HtmlString
+     */
     public function render() : string
     {
         $view = $this->getTemplateName();
@@ -100,11 +104,19 @@ class Section extends Model implements Htmlable
         return config('maki.templatePath') . '.' . $this->getTypeConfig()['template'];
     }
 
+    /**
+     * Get content as a string of HTML.
+     * @return string
+     */
     public function toHtml() : string
     {
         return (string) $this->render();
     }
 
+    /**
+     * Convert the section to its string representation.
+     * @return string
+     */
     public function __toString() : string
     {
         return $this->toHtml();

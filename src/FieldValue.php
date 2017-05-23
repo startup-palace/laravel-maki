@@ -39,11 +39,19 @@ class FieldValue extends Model
         return $this->morphTo();
     }
 
+    /**
+     * Get the config for this type of field
+     * @return array
+     */
     public function getConfigAttribute() : array
     {
         return config('maki.fields')[$this->field];
     }
 
+    /**
+     * Return data depending on the field type
+     * @return \Object | string
+     */
     public function renderData()
     {
         if ($this->type === 'object') {
@@ -53,6 +61,10 @@ class FieldValue extends Model
         return $this->data;
     }
 
+    /**
+     * Convert the section to its string representation.
+     * @return string
+     */
     public function __toString() : string
     {
         return (string) $this->renderData();
