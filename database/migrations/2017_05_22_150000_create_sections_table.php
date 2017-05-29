@@ -18,14 +18,6 @@ class CreateSectionsTable extends Migration
             $table->string('type');
             $table->uuid('parent_id')->nullable();
         });
-
-        Schema::table('sections', function (Blueprint $table) {
-            $table->foreign('parent_id')
-                ->references('id')
-                ->on('sections')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
-        });
     }
 
     /**

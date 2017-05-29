@@ -23,7 +23,7 @@ class CreateFieldValuesTable extends Migration
 
             $table->foreign('section_id')
                 ->references('id')
-                ->on('section')
+                ->on('sections')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
