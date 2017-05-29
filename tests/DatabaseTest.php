@@ -16,5 +16,6 @@ class DatabaseTest extends TestCase
     {
         $this->assertTrue(Schema::hasTable('sections'));
         $this->assertTrue(Schema::hasTable('field_values'));
+        $this->assertTrue(Schema::hasTable('links'));
     }
 }
