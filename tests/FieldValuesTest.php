@@ -18,8 +18,31 @@ class FieldValuesTest extends TestCase
     {
         $section = $this->createSectionAndFieldValues();
 
-        $this->assertEquals('A simple title', $section->fieldValues->first()->data);
-
         $this->assertTrue($section->exists);
+    }
+
+    public function testBasicData()
+    {
+        $section = $this->createSectionAndFieldValues();
+
+        $this->assertEquals('A simple title', $section->fieldValues->first()->data);
+    }
+
+    public function testComplexData()
+    {
+        $section = $this->createSection();
+
+        $category = $this->newCategory();
+
+        $fieldValue = new FieldValue([
+            'field' => 'title',
+            'section_id' => $section->id,
+        ]);
+
+        $fieldValue->setRelation('object', $category);
+
+        $this->assertEquals($category, $fieldValue->object);
+
+        $this->assertEquals('http://localhost/category/my-category', (string) $fieldValue);
     }
 }

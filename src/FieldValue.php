@@ -50,15 +50,24 @@ class FieldValue extends Model
 
     /**
      * Return data depending on the field type
-     * @return \Object | string
+     * @return Object | string
      */
     public function renderData()
     {
-        if ($this->type === 'object') {
+        if ($this->isObject()) {
             return $this->object;
         }
 
         return $this->data;
+    }
+
+    /**
+     * Determine if a field value is object-based
+     * @return boolean
+     */
+    protected function isObject() : bool
+    {
+        return $this->object !== null;
     }
 
     /**
@@ -67,6 +76,10 @@ class FieldValue extends Model
      */
     public function __toString() : string
     {
-        return (string) $this->renderData();
+        if ($this->isObject()) {
+            return $this->object->entityUrl;
+        }
+
+        return $this->renderData();
     }
 }

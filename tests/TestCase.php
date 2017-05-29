@@ -2,9 +2,12 @@
 
 namespace StartupPalace\Maki\Tests;
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use StartupPalace\Maki\FieldValue;
 use StartupPalace\Maki\Section;
+use StartupPalace\Maki\Tests\Models\Category;
 
 class TestCase extends BaseTestCase
 {
@@ -23,8 +26,31 @@ class TestCase extends BaseTestCase
             'prefix'   => '',
         ]);
 
-        \View::addLocation(__DIR__ . '/../resources/views');
-        \View::addLocation(__DIR__ . '/resources/views');
+        $this->addViewLocations();
+
+        $this->addRoutes();
+    }
+
+
+    protected function addViewLocations()
+    {
+        View::addLocation(__DIR__ . '/../resources/views');
+        View::addLocation(__DIR__ . '/resources/views');
+    }
+
+    protected function addRoutes()
+    {
+        Route::bind('category', function ($categorySlug) {
+            return Category::where('slug', $categorySlug)
+                ->firstOrFail();
+        });
+
+        Route::get('category/{category}', [
+            'as' => 'category.show',
+            'uses' => function ($category) {
+                return response()->json(compact('category'));
+            }
+        ]);
     }
 
     protected function getPackageProviders($app)
@@ -35,15 +61,22 @@ class TestCase extends BaseTestCase
         ];
     }
 
-    /**
-     * Create a default section and its fields
-     * @return Section
-     */
-    protected function createSectionAndFieldValues()
+    protected function createSection() : Section
     {
         $section = Section::create([
             'type' => 'default',
         ]);
+
+        return $section;
+    }
+
+    /**
+     * Create a default section and its fields
+     * @return Section
+     */
+    protected function createSectionAndFieldValues() : Section
+    {
+        $section = $this->createSection();
 
         $fieldValues = [
             new FieldValue(['field' => 'title', 'data' => 'A simple title']),
@@ -54,5 +87,15 @@ class TestCase extends BaseTestCase
         $section->fieldValues()->saveMany($fieldValues);
 
         return $section;
+    }
+
+    public function newCategory() : Category
+    {
+        $category = new Category([
+            'name' => 'My category',
+            'slug' => 'my-category',
+        ]);
+
+        return $category;
     }
 }
