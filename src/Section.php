@@ -5,6 +5,7 @@ namespace StartupPalace\Maki;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
@@ -39,6 +40,15 @@ class Section extends Model implements Htmlable
     public function parentSection() : BelongsTo
     {
         return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    /**
+     * Describe the `pages` relation
+     * @return BelongsToMany
+     */
+    public function pages() : BelongsToMany
+    {
+        return $this->belongsToMany(config('maki.pageClass'));
     }
 
     /**

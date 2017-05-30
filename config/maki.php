@@ -5,6 +5,8 @@ return [
     'sectionClass' => \StartupPalace\Maki\Section::class,
     // Class you want to use to represent field values
     'fieldValueClass' => \StartupPalace\Maki\FieldValue::class,
+    // Class you want to use to represent a page
+    'pageClass' => \StartupPalace\Maki\Page::class,
     // Path to Maki's templates (from `resources/views`)
     'templatePath' => 'maki',
     // Describe the field types use in your application
