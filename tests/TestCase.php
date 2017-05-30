@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use StartupPalace\Maki\FieldValue;
+use StartupPalace\Maki\Link;
 use StartupPalace\Maki\Section;
 use StartupPalace\Maki\Tests\Models\Category;
 
@@ -78,10 +79,13 @@ class TestCase extends BaseTestCase
     {
         $section = $this->createSection();
 
+        $link = $this->createSimpleLink();
+
         $fieldValues = [
             new FieldValue(['field' => 'title', 'data' => 'A simple title']),
             new FieldValue(['field' => 'text', 'data' => 'A simple text']),
             new FieldValue(['field' => 'content', 'data' => '<p>Some content</p>']),
+            new FieldValue(['field' => 'button', 'object_id' => $link->id, 'object_type' => Link::class]),
         ];
 
         $section->fieldValues()->saveMany($fieldValues);
@@ -89,7 +93,7 @@ class TestCase extends BaseTestCase
         return $section;
     }
 
-    public function newCategory() : Category
+    protected function newCategory() : Category
     {
         $category = new Category([
             'name' => 'My category',
@@ -97,5 +101,22 @@ class TestCase extends BaseTestCase
         ]);
 
         return $category;
+    }
+
+    protected function newSimpleLink()
+    {
+        return new Link([
+            'text' => 'The content of the link tag',
+            'title' => 'The title attribute',
+            'url' => 'https://github.com',
+        ]);
+    }
+
+    protected function createSimpleLink()
+    {
+        $link = $this->newSimpleLink();
+        $link->save();
+
+        return $link;
     }
 }

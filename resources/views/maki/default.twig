@@ -1,10 +1,11 @@
 <div class="row">
     <div class="col-md-12">
-        <h2>{{ section.fields.title }}</h2>
-        <p class="description">{{ section.fields.text }}</p>
+        <h2>{{ fields.title }}</h2>
+        <p class="description">{{ fields.text }}</p>
         <hr>
         <div class="content">
-            {{ section.fields.content | raw }}
+            {{ fields.content | raw }}
         </div>
+        {{ fields.button.object.render({'class': ['test']}) | raw }}
     </div>
 </div>

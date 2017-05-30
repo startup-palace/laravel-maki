@@ -3,9 +3,12 @@
 namespace StartupPalace\Maki;
 
 use Illuminate\Database\Eloquent\Model;
+use Kblais\Uuid\Uuid;
 
 class Link extends Model
 {
+    use Uuid;
+
     protected $fillable = [
         'text', 'title', 'object_id', 'object_type', 'url',
     ];
@@ -34,11 +37,11 @@ class Link extends Model
             $class = is_string($options['class']) ? $options : implode(' ', $options['class']);
         }
 
-        return "<a href=\"{$this->href}\" class=\"{$class}\" title=\"{$this->title}\">{$this->text}</a>";
+        return sprintf('<a href="%s" class="%s" title="%s">%s</a>', $this->href, $class, $this->title, $this->text);
     }
 
     public function __toString()
     {
-        return $this->render();
+        return $this->href;
     }
 }

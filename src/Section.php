@@ -69,7 +69,8 @@ class Section extends Model implements Htmlable
 
         return new HtmlString(
             View::make($view, [
-                'section' => $this,
+                'fields' => $this->fields,
+                'type' => $this->type,
             ])->render()
         );
     }

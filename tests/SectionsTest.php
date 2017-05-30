@@ -52,15 +52,21 @@ class SectionsTest extends TestCase
     {
         $section = $this->createSectionAndFieldValues();
 
-        $this->assertContains('A simple title', (string) $section->render());
-        $this->assertContains('A simple text', (string) $section->render());
-        $this->assertContains('<p>Some content</p>', (string) $section->render());
+        $this->runContentTestsOnRenderedTemplate((string) $section);
 
         $viewHtml = View::make('index', ['sections' => [$section]])->render();
 
-        $this->assertContains('<title>Maki - Test page</title>', $viewHtml);
-        $this->assertContains('A simple title', $viewHtml);
-        $this->assertContains('A simple text', $viewHtml);
-        $this->assertContains('<p>Some content</p>', $viewHtml);
+        $this->runContentTestsOnRenderedTemplate($viewHtml);
+    }
+
+    protected function runContentTestsOnRenderedTemplate($html)
+    {
+        $this->assertContains('A simple title', $html);
+        $this->assertContains('A simple text', $html);
+        $this->assertContains('<p>Some content</p>', $html);
+
+        $this->assertContains('https://github.com', $html);
+        $this->assertContains('class="test"', $html);
+        $this->assertContains('The title attribute', $html);
     }
 }

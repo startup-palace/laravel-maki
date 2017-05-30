@@ -16,7 +16,7 @@ class FieldValue extends Model
     use Uuid;
 
     protected $fillable = [
-        'section_id', 'field', 'data',
+        'section_id', 'field', 'data', 'object_id', 'object_type',
     ];
 
     protected $with = ['object'];
@@ -48,17 +48,13 @@ class FieldValue extends Model
         return config('maki.fields')[$this->field];
     }
 
-    /**
-     * Return data depending on the field type
-     * @return Object | string
-     */
-    public function renderData()
+    public function getDataAttribute()
     {
         if ($this->isObject()) {
             return $this->object;
         }
 
-        return $this->data;
+        return $this->attributes['data'];
     }
 
     /**
@@ -71,15 +67,28 @@ class FieldValue extends Model
     }
 
     /**
+     * Determine if a field is link-based
+     * @return boolean
+     */
+    protected function isLink() : bool
+    {
+        return $this->config['type'] == 'link';
+    }
+
+    /**
      * Convert the section to its string representation.
      * @return string
      */
     public function __toString() : string
     {
+        if ($this->isLink()) {
+            return $this->object->render();
+        }
+
         if ($this->isObject()) {
             return $this->object->entityUrl;
         }
 
-        return $this->renderData();
+        return $this->data;
     }
 }

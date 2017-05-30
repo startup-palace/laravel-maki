@@ -18,13 +18,16 @@ return [
         'content' => [
             'type' => 'wysiwyg',
         ],
+        'button' => [
+            'type' => 'link',
+        ],
     ],
     // Describe the different section types used in your application
     'sectionTypes' => [
         'default' => [
             'template' => 'default',
             'fields' => [
-                'title', 'text', 'content',
+                'title', 'text', 'content', 'button',
             ],
         ],
     ],
