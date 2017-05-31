@@ -72,7 +72,7 @@ class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            \StartupPalace\Maki\ServiceProvider::class,
+            \StartupPalace\Maki\Providers\ServiceProvider::class,
             \TwigBridge\ServiceProvider::class,
         ];
     }
