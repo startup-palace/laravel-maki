@@ -11,7 +11,6 @@ class Maki
     {
         $defaultOptions = [
             'namespace' => '\StartupPalace\Maki\Http\Controllers',
-            // 'middleware' => ['web'],
         ];
 
         $options = array_merge($defaultOptions, $options);
