@@ -17,7 +17,7 @@
 	</testsuites>
 
 	<php>
-		<env name="APP_KEY" value="ADummyApplicationKey" />
+		<env name="APP_KEY" value="base64:DmkRorvjDkZgk1VKJWgnPpUMlXjBt6Vbfv4/bLZZwIY=" />
 		<env name="APP_ENV" value="testing" />
 	</php>
 
