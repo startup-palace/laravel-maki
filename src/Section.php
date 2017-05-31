@@ -124,7 +124,7 @@ class Section extends Model implements SectionInterface, Htmlable
      */
     public function toHtml() : string
     {
-        return (string) $this->render();
+        return $this->render();
     }
 
     /**
