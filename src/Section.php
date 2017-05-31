@@ -11,12 +11,15 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\HtmlString;
 use Kblais\Uuid\Uuid;
+use StartupPalace\Maki\Contracts\FieldValueInterface;
+use StartupPalace\Maki\Contracts\PageInterface;
+use StartupPalace\Maki\Contracts\SectionInterface;
 
 /**
  * Section model
  * Table : sections
  */
-class Section extends Model implements Htmlable
+class Section extends Model implements SectionInterface, Htmlable
 {
     use Uuid;
 
@@ -48,7 +51,7 @@ class Section extends Model implements Htmlable
      */
     public function pages() : BelongsToMany
     {
-        return $this->belongsToMany(config('maki.pageClass'));
+        return $this->belongsToMany(PageInterface::class);
     }
 
     /**
@@ -57,7 +60,7 @@ class Section extends Model implements Htmlable
      */
     public function fieldValues() : HasMany
     {
-        return $this->hasMany(config('maki.fieldValueClass'));
+        return $this->hasMany(app()->make(FieldValueInterface::class));
     }
 
     /**
@@ -99,7 +102,7 @@ class Section extends Model implements Htmlable
                     return $existingFields->get($field);
                 }
 
-                $fieldValueClass = config('maki.fieldValueClass');
+                $fieldValueClass = app()->make(FieldValueInterface::class);
 
                 return new $fieldValueClass(compact('field'));
             })

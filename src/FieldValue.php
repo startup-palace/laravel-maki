@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Kblais\Uuid\Uuid;
+use StartupPalace\Maki\Contracts\FieldValueInterface;
+use StartupPalace\Maki\Contracts\SectionInterface;
 
 /**
  * FieldValue model
  * Table : field_values
  */
-class FieldValue extends Model
+class FieldValue extends Model implements FieldValueInterface
 {
     use Uuid;
 
@@ -27,7 +29,7 @@ class FieldValue extends Model
      */
     public function section() : BelongsToMany
     {
-        return $this->belongsTo(config('maki.sectionClass'));
+        return $this->belongsTo(app()->make(SectionInterface::class));
     }
 
     /**
