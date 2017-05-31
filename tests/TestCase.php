@@ -65,6 +65,8 @@ class TestCase extends BaseTestCase
                 return response()->json(compact('category'));
             }
         ]);
+
+        Maki::routes();
     }
 
     protected function getPackageProviders($app)
