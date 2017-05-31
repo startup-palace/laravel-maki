@@ -115,7 +115,7 @@ class Section extends Model implements SectionInterface, Htmlable
      */
     public function getTemplateName() : string
     {
-        return config('maki.templatePath') . '.' . $this->getTypeConfig()['template'];
+        return config('maki.templatePath') . '.sections.' . $this->getTypeConfig()['template'];
     }
 
     /**

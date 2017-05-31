@@ -38,11 +38,11 @@ class SectionsTest extends TestCase
             'type' => 'default',
         ]);
 
-        $this->assertEquals('maki.default', $section->getTemplateName());
+        $this->assertEquals('maki.sections.default', $section->getTemplateName());
 
         config(['maki.templatePath' => 'changedTemplatePath']);
 
-        $this->assertEquals('changedTemplatePath.default', $section->getTemplateName());
+        $this->assertEquals('changedTemplatePath.sections.default', $section->getTemplateName());
     }
 
     /**
