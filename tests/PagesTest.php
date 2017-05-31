@@ -37,6 +37,31 @@ class PagesTest extends TestCase
 
     public function testPageRendering()
     {
+        $page = $this->createPageWithSections();
+
+        $response = $this->get(route('page.show', ['my-first-page']));
+        $response->assertStatus(200);
+
+        $response->assertSee('<h1>My first page</h1>');
+
+        $response->assertSee('<h2>A simple title</h2>');
+        $response->assertSee('<h2>Second section</h2>');
+    }
+
+    public function testContext()
+    {
+        $page = $this->createPageWithSections();
+
+        config(['maki.sectionTypes.default.template' => 'context-test']);
+
+        $response = $this->get(route('page.show', ['my-first-page']));
+
+        $response->assertStatus(200);
+        $response->assertSee('<a href="#" class="btn">Back to the top</a>');
+    }
+
+    protected function createPageWithSections() : Page
+    {
         $page = Page::create([
             'published_at' => Carbon::now(),
             'title' => 'My first page',
@@ -52,12 +77,6 @@ class PagesTest extends TestCase
 
         $page->sections()->saveMany([$firstSection, $secondSection]);
 
-        $response = $this->get(route('page.show', ['my-first-page']));
-        $response->assertStatus(200);
-
-        $response->assertSee('<h1>My first page</h1>');
-
-        $response->assertSee('<h2>A simple title</h2>');
-        $response->assertSee('<h2>Second section</h2>');
+        return $page;
     }
 }

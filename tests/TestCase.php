@@ -48,8 +48,8 @@ class TestCase extends BaseTestCase
 
     protected function addViewLocations()
     {
-        View::addLocation(__DIR__ . '/../resources/views');
         View::addLocation(__DIR__ . '/resources/views');
+        View::addLocation(__DIR__ . '/../resources/views');
     }
 
     protected function addRoutes()

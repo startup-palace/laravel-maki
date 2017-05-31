@@ -1,0 +1,14 @@
+{% if context.previous %}
+<a href="#" class="btn">Back to the top</a>
+{% endif %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>{{ fields.title }}</h2>
+        <p class="description">{{ fields.text }}</p>
+        <hr>
+        <div class="content">
+            {{ fields.content | raw }}
+        </div>
+        {{ fields.button.object.render({'class': ['test']}) | raw }}
+    </div>
+</div>
