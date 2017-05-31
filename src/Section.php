@@ -76,7 +76,7 @@ class Section extends Model implements SectionInterface, Htmlable
      * Render the HTML from the view
      * @return HtmlString
      */
-    public function render() : string
+    public function render(PageInterface $page = null) : string
     {
         $view = $this->getTemplateName();
 
@@ -84,6 +84,7 @@ class Section extends Model implements SectionInterface, Htmlable
             View::make($view, [
                 'fields' => $this->fields,
                 'type' => $this->type,
+                'context' => $page ? $page->getContext() : [],
             ])->render()
         );
     }
