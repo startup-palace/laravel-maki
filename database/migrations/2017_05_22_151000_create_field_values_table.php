@@ -15,17 +15,12 @@ class CreateFieldValuesTable extends Migration
         Schema::create('maki_field_values', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->uuid('section_id');
+            $table->uuid('owner_id');
+            $table->string('owner_type');
             $table->string('field');
             $table->uuid('object_id')->nullable();
             $table->string('object_type')->nullable();
             $table->text('data')->default('');
-
-            $table->foreign('section_id')
-                ->references('id')
-                ->on('maki_sections')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
         });
     }
 

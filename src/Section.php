@@ -4,9 +4,8 @@ namespace StartupPalace\Maki;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\HtmlString;
@@ -40,11 +39,11 @@ class Section extends Model implements SectionInterface, Htmlable
 
     /**
      * Describe the `fieldValues` relation
-     * @return HasMany
+     * @return MorphMany
      */
-    public function fieldValues() : HasMany
+    public function fieldValues() : MorphMany
     {
-        return $this->hasMany(app()->make(FieldValueInterface::class));
+        return $this->morphMany(app()->make(FieldValueInterface::class), 'owner');
     }
 
     /**

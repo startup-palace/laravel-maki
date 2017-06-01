@@ -3,7 +3,6 @@
 namespace StartupPalace\Maki;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Kblais\Uuid\Uuid;
 use StartupPalace\Maki\Contracts\FieldValueInterface;
@@ -20,18 +19,18 @@ class FieldValue extends Model implements FieldValueInterface
     protected $table = 'maki_field_values';
 
     protected $fillable = [
-        'section_id', 'field', 'data', 'object_id', 'object_type',
+        'field', 'data', 'object_id', 'object_type',
     ];
 
     protected $with = ['object'];
 
     /**
-     * Describe the `section` relation
-     * @return BelongsToMany
+     * Describe the `owner` relation
+     * @return MorphTo
      */
-    public function section() : BelongsToMany
+    public function owner() : MorphTo
     {
-        return $this->belongsTo(app()->make(SectionInterface::class));
+        return $this->morphTo();
     }
 
     /**

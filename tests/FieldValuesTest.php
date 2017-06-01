@@ -36,10 +36,10 @@ class FieldValuesTest extends TestCase
 
         $fieldValue = new FieldValue([
             'field' => 'title',
-            'section_id' => $section->id,
         ]);
 
         $fieldValue->setRelation('object', $category);
+        $fieldValue->setRelation('owner', $section);
 
         $this->assertEquals($category, $fieldValue->object);
 

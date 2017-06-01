@@ -4,7 +4,7 @@ namespace StartupPalace\Maki\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 
 interface SectionInterface
@@ -17,9 +17,9 @@ interface SectionInterface
 
     /**
      * Describe the `fieldValues` relation
-     * @return HasMany
+     * @return MorphMany
      */
-    public function fieldValues() : HasMany;
+    public function fieldValues() : MorphMany;
 
     /**
      * Render the HTML from the view

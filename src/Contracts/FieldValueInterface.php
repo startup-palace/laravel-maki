@@ -2,16 +2,15 @@
 
 namespace StartupPalace\Maki\Contracts;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 interface FieldValueInterface
 {
     /**
-     * Describe the `section` relation
-     * @return BelongsToMany
+     * Describe the `owner` relation
+     * @return MorphTo
      */
-    public function section() : BelongsToMany;
+    public function owner() : MorphTo;
 
     /**
      * Describe the `object` relation
