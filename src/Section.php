@@ -5,11 +5,13 @@ namespace StartupPalace\Maki;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\HtmlString;
 use Kblais\Uuid\Uuid;
+use StartupPalace\Maki\Contracts\FieldSubsetInterface;
 use StartupPalace\Maki\Contracts\FieldValueInterface;
 use StartupPalace\Maki\Contracts\PageInterface;
 use StartupPalace\Maki\Contracts\SectionInterface;
@@ -44,6 +46,15 @@ class Section extends Model implements SectionInterface, Htmlable
     public function fieldValues() : MorphMany
     {
         return $this->morphMany(app()->make(FieldValueInterface::class), 'owner');
+    }
+
+    /**
+     * Describe the `fieldSubsets` relation
+     * @return HasMany
+     */
+    public function fieldSubsets() : HasMany
+    {
+        return $this->hasMany(app()->make(FieldSubsetInterface::class));
     }
 
     /**

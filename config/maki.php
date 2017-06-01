@@ -25,6 +25,12 @@ return [
             'fields' => [
                 'title', 'text', 'content', 'button',
             ],
+            'fieldSubsets' => [
+                'card' => [
+                    'limit' => 2,
+                    'fields' => ['title', 'text'],
+                ],
+            ],
         ],
     ],
 ];

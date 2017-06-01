@@ -73,11 +73,17 @@ class TestCase extends BaseTestCase
 
     protected function createSection() : Section
     {
-        $section = Section::create([
-            'type' => 'default',
-        ]);
+        $section = $this->newSection();
+        $section->save();
 
         return $section;
+    }
+
+    protected function newSection()
+    {
+        return new Section([
+            'type' => 'default',
+        ]);
     }
 
     /**

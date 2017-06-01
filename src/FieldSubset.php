@@ -35,4 +35,15 @@ class FieldSubset extends Model implements FieldSubsetInterface
     {
         return $this->belongsTo(app()->make(SectionInterface::class));
     }
+
+    public function getConfig()
+    {
+        return $this->section->getConfig('fieldSubsets.' . $this->type);
+    }
+
+    public function getFieldsAttribute()
+    {
+        return $this->fieldValues
+            ->keyBy('type');
+    }
 }
