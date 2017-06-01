@@ -17,11 +17,13 @@ use StartupPalace\Maki\Contracts\SectionInterface;
 
 /**
  * Section model
- * Table : sections
+ * Table : maki_sections
  */
 class Section extends Model implements SectionInterface, Htmlable
 {
     use Uuid;
+
+    protected $table = 'maki_sections';
 
     protected $fillable = [
         'type', 'parent_id',
@@ -51,7 +53,7 @@ class Section extends Model implements SectionInterface, Htmlable
      */
     public function pages() : BelongsToMany
     {
-        return $this->belongsToMany(PageInterface::class);
+        return $this->belongsToMany(PageInterface::class, 'maki_page_section');
     }
 
     /**

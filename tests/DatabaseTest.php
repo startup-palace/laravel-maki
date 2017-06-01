@@ -14,10 +14,10 @@ class DatabaseTest extends TestCase
      */
     public function testRunningMigration()
     {
-        $this->assertTrue(Schema::hasTable('sections'));
-        $this->assertTrue(Schema::hasTable('field_values'));
-        $this->assertTrue(Schema::hasTable('links'));
-        $this->assertTrue(Schema::hasTable('pages'));
-        $this->assertTrue(Schema::hasTable('page_section'));
+        $this->assertTrue(Schema::hasTable('maki_sections'));
+        $this->assertTrue(Schema::hasTable('maki_field_values'));
+        $this->assertTrue(Schema::hasTable('maki_links'));
+        $this->assertTrue(Schema::hasTable('maki_pages'));
+        $this->assertTrue(Schema::hasTable('maki_page_section'));
     }
 }

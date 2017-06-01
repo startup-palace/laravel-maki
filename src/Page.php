@@ -13,6 +13,8 @@ class Page extends Model implements PageInterface
 {
     use Uuid;
 
+    protected $table = 'maki_pages';
+
     protected $fillable = [
         'published_at', 'title', 'slug',
     ];
@@ -28,7 +30,7 @@ class Page extends Model implements PageInterface
 
     public function sections() : BelongsToMany
     {
-        return $this->belongsToMany(app()->make(SectionInterface::class));
+        return $this->belongsToMany(app()->make(SectionInterface::class), 'maki_page_section');
     }
 
     public function render() : string

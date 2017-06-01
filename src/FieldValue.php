@@ -11,11 +11,13 @@ use StartupPalace\Maki\Contracts\SectionInterface;
 
 /**
  * FieldValue model
- * Table : field_values
+ * Table : maki_field_values
  */
 class FieldValue extends Model implements FieldValueInterface
 {
     use Uuid;
+
+    protected $table = 'maki_field_values';
 
     protected $fillable = [
         'section_id', 'field', 'data', 'object_id', 'object_type',

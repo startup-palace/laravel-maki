@@ -12,7 +12,7 @@ class CreateFieldValuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('field_values', function (Blueprint $table) {
+        Schema::create('maki_field_values', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->uuid('section_id');
@@ -23,7 +23,7 @@ class CreateFieldValuesTable extends Migration
 
             $table->foreign('section_id')
                 ->references('id')
-                ->on('sections')
+                ->on('maki_sections')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
@@ -36,6 +36,6 @@ class CreateFieldValuesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('field_values');
+        Schema::drop('maki_field_values');
     }
 }

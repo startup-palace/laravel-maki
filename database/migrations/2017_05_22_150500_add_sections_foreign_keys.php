@@ -12,10 +12,10 @@ class AddSectionsForeignKeys extends Migration
      */
     public function up()
     {
-        Schema::table('sections', function (Blueprint $table) {
+        Schema::table('maki_sections', function (Blueprint $table) {
             $table->foreign('parent_id')
                 ->references('id')
-                ->on('sections')
+                ->on('maki_sections')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
         });
@@ -28,8 +28,8 @@ class AddSectionsForeignKeys extends Migration
      */
     public function down()
     {
-        Schema::table('sections', function (Blueprint $table) {
-            $table->dropForeign('sections_parent_id_foreign');
+        Schema::table('maki_sections', function (Blueprint $table) {
+            $table->dropForeign('maki_sections_parent_id_foreign');
         });
     }
 }

@@ -12,7 +12,7 @@ class CreateSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sections', function (Blueprint $table) {
+        Schema::create('maki_sections', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->string('type');
@@ -27,6 +27,6 @@ class CreateSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('sections');
+        Schema::drop('maki_sections');
     }
 }

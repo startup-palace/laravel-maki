@@ -7,7 +7,7 @@ class CreateLinksTable extends Migration
 {
     public function up()
     {
-        Schema::create('links', function (Blueprint $table) {
+        Schema::create('maki_links', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->string('text');
@@ -20,6 +20,6 @@ class CreateLinksTable extends Migration
 
     public function down()
     {
-        Schema::drop('links');
+        Schema::drop('maki_links');
     }
 }

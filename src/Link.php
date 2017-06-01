@@ -9,6 +9,8 @@ class Link extends Model
 {
     use Uuid;
 
+    protected $table = 'maki_links';
+
     protected $fillable = [
         'text', 'title', 'object_id', 'object_type', 'url',
     ];

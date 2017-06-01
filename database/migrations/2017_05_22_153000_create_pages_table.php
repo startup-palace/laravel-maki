@@ -7,7 +7,7 @@ class CreatePagesTable extends Migration
 {
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('maki_pages', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->datetime('published_at')->nullable();
@@ -18,6 +18,6 @@ class CreatePagesTable extends Migration
 
     public function down()
     {
-        Schema::drop('pages');
+        Schema::drop('maki_pages');
     }
 }
