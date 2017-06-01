@@ -4,7 +4,7 @@ namespace StartupPalace\Maki\Traits;
 
 trait MakiEntityTrait
 {
-    public function getEntityUrlAttribute()
+    public function getEntityUrlAttribute() : string
     {
         return route($this->getShowRouteName(), $this->getEntityRouteParameters());
     }

@@ -6,12 +6,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Kblais\Uuid\Uuid;
+use StartupPalace\Maki\Contracts\MakiEntityInterface;
 use StartupPalace\Maki\Contracts\PageInterface;
 use StartupPalace\Maki\Contracts\SectionInterface;
+use StartupPalace\Maki\Traits\MakiEntityTrait;
 
-class Page extends Model implements PageInterface
+class Page extends Model implements PageInterface, MakiEntityInterface
 {
-    use Uuid;
+    use Uuid, MakiEntityTrait;
 
     protected $table = 'maki_pages';
 
@@ -63,6 +65,21 @@ class Page extends Model implements PageInterface
     public function getContext() : array
     {
         return $this->context;
+    }
+
+    public function getEntityRouteParameters() : array
+    {
+        return [$this->slug];
+    }
+
+    public function getShowRouteName() : string
+    {
+        return 'page.show';
+    }
+
+    public static function getEntityName() : string
+    {
+        return 'page';
     }
 
     /**

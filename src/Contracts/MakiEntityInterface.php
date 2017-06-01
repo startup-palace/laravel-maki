@@ -10,7 +10,7 @@ interface MakiEntityInterface
 
     public function getShowRouteName() : string;
 
-    // public function getSearchBuilder($search) : Builder;
-
     public static function getEntityName() : string;
+
+    public function getEntityUrlAttribute() : string;
 }
