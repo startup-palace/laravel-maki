@@ -19,5 +19,6 @@ class DatabaseTest extends TestCase
         $this->assertTrue(Schema::hasTable('maki_links'));
         $this->assertTrue(Schema::hasTable('maki_pages'));
         $this->assertTrue(Schema::hasTable('maki_page_section'));
+        $this->assertTrue(Schema::hasTable('maki_field_subsets'));
     }
 }
