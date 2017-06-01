@@ -21,12 +21,8 @@ class SectionsTest extends TestCase
             'type' => 'default',
         ]);
 
-        $this->assertTrue($section->fields->contains(new FieldValue(['field' => 'title'])));
-        $this->assertEquals(
-            'wysiwyg',
-            $section->fields['content']
-                ->config['type']
-        );
+        $this->assertArrayHasKey('fields', $section->getConfig());
+        $this->assertEquals(["title", "text", "content", "button"], $section->getConfig('fields'));
     }
 
     /**

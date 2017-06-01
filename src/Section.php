@@ -67,11 +67,17 @@ class Section extends Model implements SectionInterface, Htmlable
 
     /**
      * Get the section config depending on its type
-     * @return array
+     * @return mixed
      */
-    protected function getTypeConfig() : array
+    public function getConfig(string $key = null)
     {
-        return array_get(config('maki.sectionTypes'), $this->type);
+        $config = array_get(config('maki.sectionTypes'), $this->type);
+
+        if ($key) {
+            return array_get($config, $key);
+        }
+
+        return $config;
     }
 
     /**
@@ -97,19 +103,7 @@ class Section extends Model implements SectionInterface, Htmlable
      */
     public function getFieldsAttribute() : Collection
     {
-        $existingFields = $this->fieldValues->keyBy('field');
-
-        return collect($this->getTypeConfig()['fields'])
-            ->map(function ($field) use ($existingFields) {
-                if ($existingFields->has($field)) {
-                    return $existingFields->get($field);
-                }
-
-                $fieldValueClass = app()->make(FieldValueInterface::class);
-
-                return new $fieldValueClass(compact('field'));
-            })
-            ->keyBy('field');
+        return $this->fieldValues->keyBy('field');
     }
 
     /**
@@ -118,7 +112,7 @@ class Section extends Model implements SectionInterface, Htmlable
      */
     public function getTemplateName() : string
     {
-        return config('maki.templatePath') . '.sections.' . $this->getTypeConfig()['template'];
+        return config('maki.templatePath') . '.sections.' . $this->getConfig('template');
     }
 
     /**
