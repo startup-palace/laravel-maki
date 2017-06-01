@@ -5,7 +5,7 @@ namespace StartupPalace\Maki\Tests\Models;
 use Illuminate\Database\Eloquent\Model;
 use Kblais\Uuid\Uuid;
 use StartupPalace\Maki\Contracts\MakiEntityInterface;
-use StartupPalace\Maki\MakiEntityTrait;
+use StartupPalace\Maki\Traits\MakiEntityTrait;
 
 class Category extends Model implements MakiEntityInterface
 {

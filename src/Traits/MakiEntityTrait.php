@@ -1,6 +1,6 @@
 <?php
 
-namespace StartupPalace\Maki;
+namespace StartupPalace\Maki\Traits;
 
 trait MakiEntityTrait
 {
