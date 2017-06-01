@@ -1,6 +1,6 @@
 <?php
 
-namespace StartupPalace\Maki;
+namespace StartupPalace\Maki\Contracts;
 
 use Illuminate\Database\Eloquent\Builder;
 
