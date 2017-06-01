@@ -10,18 +10,6 @@ use Illuminate\Support\Collection;
 interface SectionInterface
 {
     /**
-     * Describe the `sections` relation
-     * @return HasMany
-     */
-    public function sections() : HasMany;
-
-    /**
-     * Describe the `parentSection` relation
-     * @return BelongsTo
-     */
-    public function parentSection() : BelongsTo;
-
-    /**
      * Describe the `pages` relation
      * @return BelongsToMany
      */

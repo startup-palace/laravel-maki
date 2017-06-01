@@ -16,7 +16,6 @@ class CreateSectionsTable extends Migration
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->string('type');
-            $table->uuid('parent_id')->nullable();
         });
     }
 

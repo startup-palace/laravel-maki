@@ -30,24 +30,6 @@ class Section extends Model implements SectionInterface, Htmlable
     ];
 
     /**
-     * Describe the `sections` relation
-     * @return HasMany
-     */
-    public function sections() : HasMany
-    {
-        return $this->hasMany(self::class, 'parent_id');
-    }
-
-    /**
-     * Describe the `parentSection` relation
-     * @return BelongsTo
-     */
-    public function parentSection() : BelongsTo
-    {
-        return $this->belongsTo(self::class, 'parent_id');
-    }
-
-    /**
      * Describe the `pages` relation
      * @return BelongsToMany
      */
