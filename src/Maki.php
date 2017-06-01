@@ -4,6 +4,12 @@ namespace StartupPalace\Maki;
 
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Route;
+use StartupPalace\Maki\Contracts\FieldValueInterface;
+use StartupPalace\Maki\Contracts\PageInterface;
+use StartupPalace\Maki\Contracts\SectionInterface;
+use StartupPalace\Maki\FieldValue;
+use StartupPalace\Maki\Page;
+use StartupPalace\Maki\Section;
 
 class Maki
 {
@@ -21,5 +27,12 @@ class Maki
                 'as' => 'page.show',
             ]);
         });
+    }
+
+    public static function containerBindings()
+    {
+        app()->bind(SectionInterface::class, Section::class);
+        app()->bind(FieldValueInterface::class, FieldValue::class);
+        app()->bind(PageInterface::class, Page::class);
     }
 }

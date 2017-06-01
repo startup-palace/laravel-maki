@@ -5,13 +5,9 @@ namespace StartupPalace\Maki\Tests;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Orchestra\Testbench\TestCase as BaseTestCase;
-use StartupPalace\Maki\Contracts\FieldValueInterface;
-use StartupPalace\Maki\Contracts\PageInterface;
-use StartupPalace\Maki\Contracts\SectionInterface;
 use StartupPalace\Maki\FieldValue;
 use StartupPalace\Maki\Link;
 use StartupPalace\Maki\Maki;
-use StartupPalace\Maki\Page;
 use StartupPalace\Maki\Section;
 use StartupPalace\Maki\Tests\Models\Category;
 
@@ -39,9 +35,7 @@ class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->app->bind(SectionInterface::class, Section::class);
-        $this->app->bind(FieldValueInterface::class, FieldValue::class);
-        $this->app->bind(PageInterface::class, Page::class);
+        Maki::containerBindings();
 
         $this->addRoutes();
     }
