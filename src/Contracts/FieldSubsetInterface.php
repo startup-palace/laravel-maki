@@ -32,5 +32,4 @@ interface FieldSubsetInterface
      * @return Collection
      */
     public function getFieldsAttribute() : Collection;
-
 }
