@@ -32,6 +32,9 @@ class FieldSubsetTest extends TestCase
         $this->assertEquals('default', $fieldSubset->section->type);
     }
 
+    /**
+     * Tests the `fieldValue` relationship
+     */
     public function testFieldValuesRelation()
     {
         $fieldSubset = $this->createFieldSubset();

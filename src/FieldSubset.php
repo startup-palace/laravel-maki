@@ -5,6 +5,7 @@ namespace StartupPalace\Maki;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Collection;
 use Kblais\Uuid\Uuid;
 use StartupPalace\Maki\Contracts\FieldSubsetInterface;
 use StartupPalace\Maki\Contracts\FieldValueInterface;
@@ -36,12 +37,20 @@ class FieldSubset extends Model implements FieldSubsetInterface
         return $this->belongsTo(app()->make(SectionInterface::class));
     }
 
-    public function getConfig()
+    /**
+     * Get config for the current FieldSubset type
+     * @return array
+     */
+    public function getConfig() : array
     {
         return $this->section->getConfig('fieldSubsets.' . $this->type);
     }
 
-    public function getFieldsAttribute()
+    /**
+     * Get subset's field values, keyed by type
+     * @return Collection
+     */
+    public function getFieldsAttribute() : Collection
     {
         return $this->fieldValues
             ->keyBy('type');
