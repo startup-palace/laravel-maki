@@ -44,6 +44,9 @@ class FieldSubsetTest extends TestCase
         $fieldSubset = $this->addFieldValuesToSubset($fieldSubset);
 
         $this->assertEquals(2, $fieldSubset->fieldValues()->count());
+
+        $this->assertTrue($fieldSubset->fields->has('title'));
+        $this->assertTrue($fieldSubset->fields->has('text'));
     }
 
     /**
