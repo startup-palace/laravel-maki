@@ -83,6 +83,7 @@ class Section extends Model implements SectionInterface, Htmlable
         return new HtmlString(
             View::make($view, [
                 'fields' => $this->fields,
+                'subsets' => $this->subsets,
                 'type' => $this->type,
                 'context' => $page ? $page->getContext() : [],
             ])->render()
@@ -96,6 +97,18 @@ class Section extends Model implements SectionInterface, Htmlable
     public function getFieldsAttribute() : Collection
     {
         return $this->fieldValues->keyBy('field');
+    }
+
+    /**
+     * List field subsets of the section, grouped by type
+     * @return [type] [description]
+     */
+    public function getSubsetsAttribute() : Collection
+    {
+        return $this->fieldSubsets()
+            ->with('fieldValues')
+            ->get()
+            ->groupBy('type');
     }
 
     /**

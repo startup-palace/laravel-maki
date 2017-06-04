@@ -4,6 +4,7 @@ namespace StartupPalace\Maki\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use StartupPalace\Maki\FieldSubset;
+use StartupPalace\Maki\Section;
 
 class FieldSubsetTest extends TestCase
 {
@@ -47,6 +48,33 @@ class FieldSubsetTest extends TestCase
 
         $this->assertTrue($fieldSubset->fields->has('title'));
         $this->assertTrue($fieldSubset->fields->has('text'));
+    }
+
+    public function testRendering()
+    {
+        config([
+            'maki.sectionTypes.fieldSubsetTest' => [
+                'template' => 'field-subset-test',
+                'fieldSubsets' => [
+                    'card' => [
+                        'limit' => 2,
+                        'fields' => ['title', 'text'],
+                    ],
+                ],
+            ],
+        ]);
+
+        $section = Section::create([
+            'type' => 'fieldSubsetTest',
+        ]);
+
+        $fieldSubset = $this->addFieldValuesToSubset(FieldSubset::create([
+            'type' => 'card',
+            'section_id' => $section->id,
+        ]));
+
+        $this->assertContains('<h2>My card</h2>', $section->render());
+        $this->assertContains('<p>The text of my card</p>', $section->render());
     }
 
     /**

@@ -52,7 +52,8 @@ class FieldSubset extends Model implements FieldSubsetInterface
      */
     public function getFieldsAttribute() : Collection
     {
-        return $this->fieldValues
+        return $this->fieldValues()
+            ->get()
             ->keyBy('field');
     }
 }
