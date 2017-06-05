@@ -105,10 +105,7 @@ class Section extends Model implements SectionInterface, Htmlable
      */
     public function getSubsetsAttribute() : Collection
     {
-        return $this->fieldSubsets()
-            ->with('fieldValues')
-            ->get()
-            ->groupBy('type');
+        return $this->fieldSubsets->groupBy('type');
     }
 
     /**
