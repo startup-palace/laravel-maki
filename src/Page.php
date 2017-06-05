@@ -37,7 +37,7 @@ class Page extends Model implements PageInterface, MakiEntityInterface
 
     public function render() : string
     {
-        $this->load('sections.fieldValues.object', 'sections.fieldSubsets');
+        $this->load('sections.fieldValues.object', 'sections.fieldSubsets.fieldValues.objects');
 
         return $this->sections->reduce(function ($carry, $section) {
             $this->refreshContext($section);
