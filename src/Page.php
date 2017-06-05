@@ -18,7 +18,7 @@ class Page extends Model implements PageInterface, MakiEntityInterface
     protected $table = 'maki_pages';
 
     protected $fillable = [
-        'published_at', 'title', 'slug',
+        'published_at', 'title', 'slug', 'unique_id',
     ];
 
     protected $dates = ['published_at'];

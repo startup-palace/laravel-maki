@@ -13,6 +13,7 @@ class CreatePagesTable extends Migration
             $table->datetime('published_at')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('unique_id')->nullable()->unique();
         });
     }
 
