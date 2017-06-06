@@ -20,6 +20,6 @@ class Menu extends Model implements MenuInterface
 
     public function menuItems() : HasMany
     {
-        return $this->hasMany(MenuItemInterface::class);
+        return $this->hasMany(app(MenuItemInterface::class));
     }
 }

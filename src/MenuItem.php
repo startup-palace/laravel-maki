@@ -22,21 +22,21 @@ class MenuItem extends Model implements MenuItemInterface
 
     public function menu() : BelongsTo
     {
-        return $this->belongsTo(MenuInterface::class);
+        return $this->belongsTo(app(MenuInterface::class));
     }
 
     public function parent() : BelongsTo
     {
-        return $this->belongsTo(MenuItemInterface::class);
+        return $this->belongsTo(app(MenuItemInterface::class));
     }
 
     public function menuItems() : HasMany
     {
-        return $this->hasMany(MenuItemInterface::class, 'parent_id');
+        return $this->hasMany(app(MenuItemInterface::class), 'parent_id');
     }
 
     public function link() : BelongsTo
     {
-        return $this->belongsTo(LinkInterface::class);
+        return $this->belongsTo(app(LinkInterface::class));
     }
 }
