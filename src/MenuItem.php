@@ -4,7 +4,8 @@ namespace StartupPalace\Maki;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Kblais\Uuid\Uuid;
 use StartupPalace\Maki\Contracts\LinkInterface;
 use StartupPalace\Maki\Contracts\MenuInterface;
@@ -17,22 +18,17 @@ class MenuItem extends Model implements MenuItemInterface
     protected $table = 'maki_menu_items';
 
     protected $fillable = [
-        'title', 'menu_id', 'parent_id', 'link_id',
+        'title', 'parent_id', 'link_id',
     ];
 
-    public function menu() : BelongsTo
+    public function parent() : MorphTo
     {
-        return $this->belongsTo(app(MenuInterface::class));
+        return $this->morphTo();
     }
 
-    public function parent() : BelongsTo
+    public function menuItems() : MorphMany
     {
-        return $this->belongsTo(app(MenuItemInterface::class));
-    }
-
-    public function menuItems() : HasMany
-    {
-        return $this->hasMany(app(MenuItemInterface::class), 'parent_id');
+        return $this->morphMany(app(MenuItemInterface::class), 'parent');
     }
 
     public function link() : BelongsTo
