@@ -6,10 +6,14 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Route;
 use StartupPalace\Maki\Contracts\FieldSubsetInterface;
 use StartupPalace\Maki\Contracts\FieldValueInterface;
+use StartupPalace\Maki\Contracts\MenuInterface;
+use StartupPalace\Maki\Contracts\MenuItemInterface;
 use StartupPalace\Maki\Contracts\PageInterface;
 use StartupPalace\Maki\Contracts\SectionInterface;
 use StartupPalace\Maki\FieldSubset;
 use StartupPalace\Maki\FieldValue;
+use StartupPalace\Maki\Menu;
+use StartupPalace\Maki\MenuItem;
 use StartupPalace\Maki\Page;
 use StartupPalace\Maki\Section;
 
@@ -55,5 +59,7 @@ class Maki
         app()->bind(FieldValueInterface::class, FieldValue::class);
         app()->bind(PageInterface::class, Page::class);
         app()->bind(FieldSubsetInterface::class, FieldSubset::class);
+        app()->bind(MenuInterface::class, Menu::class);
+        app()->bind(MenuItemInterface::class, MenuItem::class);
     }
 }

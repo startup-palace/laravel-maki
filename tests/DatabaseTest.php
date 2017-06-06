@@ -3,6 +3,7 @@
 namespace StartupPalace\Maki\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schema;
 
 class DatabaseTest extends TestCase
@@ -20,5 +21,7 @@ class DatabaseTest extends TestCase
         $this->assertTrue(Schema::hasTable('maki_pages'));
         $this->assertTrue(Schema::hasTable('maki_page_section'));
         $this->assertTrue(Schema::hasTable('maki_field_subsets'));
+        $this->assertTrue(Schema::hasTable('maki_menus'));
+        $this->assertTrue(Schema::hasTable('maki_menu_items'));
     }
 }
