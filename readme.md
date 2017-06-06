@@ -5,7 +5,7 @@ display your content.
 
 ## Requirements
 
-- PHP >= 7.1
+- PHP >= 7.0
 - Laravel 5.4
 - [TwigBridge](https://github.com/rcrowe/TwigBridge/)
 
