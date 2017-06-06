@@ -18,7 +18,7 @@ class PageController extends Controller
 
     public function show(Page $page)
     {
-        $page->load('sections.fieldValues.object', 'sections.fieldSubsets.fieldValues.objects');
+        $page->load('sections.fieldValues.object', 'sections.fieldSubsets.fieldValues.object');
 
         return response()->json($page);
     }
