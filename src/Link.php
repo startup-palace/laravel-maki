@@ -3,9 +3,11 @@
 namespace StartupPalace\Maki;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Kblais\Uuid\Uuid;
+use StartupPalace\Maki\Contracts\LinkInterface;
 
-class Link extends Model
+class Link extends Model implements LinkInterface
 {
     use Uuid;
 
@@ -17,12 +19,20 @@ class Link extends Model
 
     protected $appends = ['href'];
 
-    public function object()
+    /**
+     * Describe the `object` relation
+     * @return MorphTo
+     */
+    public function object() : MorphTo
     {
         return $this->morphTo();
     }
 
-    public function getHrefAttribute()
+    /**
+     * Get the link destination
+     * @return string
+     */
+    public function getHrefAttribute() : string
     {
         if ($this->url) {
             return $this->url;
@@ -31,7 +41,12 @@ class Link extends Model
         return $this->object->entityUrl;
     }
 
-    public function render(array $options = array())
+    /**
+     * Render the HTML code for the link
+     * @param  array  $options Options for the link
+     * @return string
+     */
+    public function render(array $options = array()) : string
     {
         $class = '';
 
@@ -42,7 +57,11 @@ class Link extends Model
         return sprintf('<a href="%s" class="%s" title="%s">%s</a>', $this->href, $class, $this->title, $this->text);
     }
 
-    public function __toString()
+    /**
+     * String representation of the link
+     * @return string
+     */
+    public function __toString() : string
     {
         return $this->href;
     }

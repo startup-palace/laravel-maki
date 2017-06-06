@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kblais\Uuid\Uuid;
+use StartupPalace\Maki\Contracts\LinkInterface;
 use StartupPalace\Maki\Contracts\MenuInterface;
 use StartupPalace\Maki\Contracts\MenuItemInterface;
-use StartupPalace\Maki\Link;
 
 class MenuItem extends Model implements MenuItemInterface
 {
@@ -35,6 +35,6 @@ class MenuItem extends Model implements MenuItemInterface
 
     public function link() : BelongsTo
     {
-        return $this->belongsTo(Link::class);
+        return $this->belongsTo(LinkInterface::class);
     }
 }
