@@ -31,6 +31,24 @@ class Maki
         });
     }
 
+    public static function adminRoutes($options = [])
+    {
+        $defaultOptions = [
+            'namespace' => '\StartupPalace\Maki\Http\Controllers\Admin',
+            'as' => 'admin.',
+            'prefix' => 'admin',
+            'middleware' => ['web'],
+        ];
+
+        $options = array_merge($defaultOptions, $options);
+
+        Route::group($options, function ($router) {
+            $router->resource('page', 'PageController', [
+                'only' => ['index', 'store', 'show', 'update', 'destroy'],
+            ]);
+        });
+    }
+
     public static function containerBindings()
     {
         app()->bind(SectionInterface::class, Section::class);

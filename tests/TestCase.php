@@ -61,6 +61,7 @@ class TestCase extends BaseTestCase
         ]);
 
         Maki::routes();
+        Maki::adminRoutes();
     }
 
     protected function getPackageProviders($app)
