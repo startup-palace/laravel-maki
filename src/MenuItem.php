@@ -14,6 +14,8 @@ class MenuItem extends Model implements MenuItemInterface
 {
     use Uuid;
 
+    protected $table = 'maki_menu_items';
+
     protected $fillable = [
         'title', 'menu_id', 'parent_id', 'link_id',
     ];

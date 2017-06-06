@@ -12,6 +12,8 @@ class Menu extends Model implements MenuInterface
 {
     use Uuid;
 
+    protected $table = 'maki_menus';
+
     protected $fillable = [
         'title', 'description', 'type',
     ];
