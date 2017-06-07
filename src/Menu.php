@@ -21,11 +21,20 @@ class Menu extends Model implements MenuInterface
         'title', 'description', 'type',
     ];
 
+    /**
+     * Describe the `menuItems` relation
+     * @return MorphMany
+     */
     public function menuItems() : MorphMany
     {
         return $this->morphMany(app(MenuItemInterface::class), 'parent');
     }
 
+    /**
+     * Render the menu
+     * @param  PageInterface|null $page
+     * @return HtmlString
+     */
     public function render(PageInterface $page = null) : HtmlString
     {
         return new HtmlString(
@@ -52,7 +61,11 @@ class Menu extends Model implements MenuInterface
         return $config;
     }
 
-    public function getTemplateName()
+    /**
+     * Get the template name for the menu
+     * @return string
+     */
+    public function getTemplateName() : string
     {
         return config('maki.templatePath') . '.' . $this->getConfig('template');
     }

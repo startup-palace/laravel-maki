@@ -21,16 +21,28 @@ class MenuItem extends Model implements MenuItemInterface
         'title', 'parent_id', 'link_id',
     ];
 
+    /**
+     * Describe the `parent` relation
+     * @return MorphTo
+     */
     public function parent() : MorphTo
     {
         return $this->morphTo();
     }
 
+    /**
+     * Describe the `menuItems` relation
+     * @return MorphMany
+     */
     public function menuItems() : MorphMany
     {
         return $this->morphMany(app(MenuItemInterface::class), 'parent');
     }
 
+    /**
+     * Describe the `link` relation
+     * @return BelongsTo
+     */
     public function link() : BelongsTo
     {
         return $this->belongsTo(app(LinkInterface::class));
