@@ -12,6 +12,14 @@ class MenusTest extends TestCase
 {
     use DatabaseMigrations;
 
+    public function testMenuConfig()
+    {
+        $menu = $this->newMenu();
+
+        $this->assertEquals(['template' => 'menu.aside'], $menu->getConfig());
+        $this->assertEquals('menu.aside', $menu->getConfig('template'));
+    }
+
     public function testMenuMenuItemRelation()
     {
         list($menu) = $this->createMenuWithMenuItem();

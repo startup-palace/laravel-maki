@@ -33,4 +33,9 @@ return [
             ],
         ],
     ],
+    'menus' => [
+        'aside' => [
+            'template' => 'menu.aside',
+        ],
+    ],
 ];
