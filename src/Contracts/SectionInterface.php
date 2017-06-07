@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\HtmlString;
 
 interface SectionInterface
 {
@@ -25,7 +26,7 @@ interface SectionInterface
      * Render the HTML from the view
      * @return HtmlString
      */
-    public function render() : string;
+    public function render() : HtmlString;
 
     /**
      * Lists the fields of the section

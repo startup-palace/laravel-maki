@@ -40,8 +40,6 @@ class Page extends Model implements PageInterface, MakiEntityInterface
         $this->load('sections.fieldValues.object', 'sections.fieldSubsets.fieldValues.object');
 
         return $this->sections->reduce(function ($carry, $section) {
-            $this->refreshContext($section);
-
             return $carry . "\n" . $section->render($this);
         }, '');
     }
@@ -56,12 +54,14 @@ class Page extends Model implements PageInterface, MakiEntityInterface
 
     public function refreshContext(SectionInterface &$section) : array
     {
-        $this->context = [
-            'previous' => array_get($this->context, 'current', null),
-            'current' => $section,
-        ];
+        array_set($this->context, 'previous', $section);
 
         return $this->context;
+    }
+
+    public function applyContextUpdate($callback)
+    {
+        $this->context = $callback($this->context);
     }
 
     public function getContext() : array

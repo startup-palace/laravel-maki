@@ -76,11 +76,11 @@ class Section extends Model implements SectionInterface, Htmlable
      * Render the HTML from the view
      * @return HtmlString
      */
-    public function render(PageInterface $page = null) : string
+    public function render(PageInterface $page = null) : HtmlString
     {
         $view = $this->getTemplateName();
 
-        return new HtmlString(
+        $content = new HtmlString(
             View::make($view, [
                 'fields' => $this->fields,
                 'subsets' => $this->subsets,
@@ -88,6 +88,16 @@ class Section extends Model implements SectionInterface, Htmlable
                 'context' => $page ? $page->getContext() : [],
             ])->render()
         );
+
+        if ($page) {
+            $page->refreshContext($this);
+
+            if ($callback = $this->getConfig('renderCallback')) {
+                $page->applyContextUpdate($callback);
+            }
+        }
+
+        return $content;
     }
 
     /**

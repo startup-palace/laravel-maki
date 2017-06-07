@@ -73,8 +73,8 @@ class FieldSubsetTest extends TestCase
             'section_id' => $section->id,
         ]));
 
-        $this->assertContains('<h2>My card</h2>', $section->render());
-        $this->assertContains('<p>The text of my card</p>', $section->render());
+        $this->assertContains('<h2>My card</h2>', (string) $section->render());
+        $this->assertContains('<p>The text of my card</p>', (string) $section->render());
     }
 
     /**
