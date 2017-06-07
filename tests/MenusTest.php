@@ -16,8 +16,9 @@ class MenusTest extends TestCase
     {
         $menu = $this->newMenu();
 
-        $this->assertEquals(['template' => 'menu.aside'], $menu->getConfig());
-        $this->assertEquals('menu.aside', $menu->getConfig('template'));
+        $this->assertEquals(['template' => 'menus.aside'], $menu->getConfig());
+        $this->assertEquals('menus.aside', $menu->getConfig('template'));
+        $this->assertEquals('maki.menus.aside', $menu->getTemplateName());
     }
 
     public function testMenuMenuItemRelation()

@@ -39,4 +39,9 @@ class Menu extends Model implements MenuInterface
 
         return $config;
     }
+
+    public function getTemplateName()
+    {
+        return config('maki.templatePath') . '.' . $this->getConfig('template');
+    }
 }

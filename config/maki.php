@@ -35,7 +35,7 @@ return [
     ],
     'menus' => [
         'aside' => [
-            'template' => 'menu.aside',
+            'template' => 'menus.aside',
         ],
     ],
 ];
