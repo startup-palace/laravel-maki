@@ -4,6 +4,8 @@ namespace StartupPalace\Maki;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\HtmlString;
 use Kblais\Uuid\Uuid;
 use StartupPalace\Maki\Contracts\MenuInterface;
 use StartupPalace\Maki\Contracts\MenuItemInterface;
@@ -22,6 +24,16 @@ class Menu extends Model implements MenuInterface
     public function menuItems() : MorphMany
     {
         return $this->morphMany(app(MenuItemInterface::class), 'parent');
+    }
+
+    public function render(PageInterface $page = null) : HtmlString
+    {
+        return new HtmlString(
+            View::make($this->getTemplateName(), [
+                'menu' => $this,
+                'page' => $page,
+            ])->render()
+        );
     }
 
     /**
@@ -43,5 +55,10 @@ class Menu extends Model implements MenuInterface
     public function getTemplateName()
     {
         return config('maki.templatePath') . '.' . $this->getConfig('template');
+    }
+
+    public function __toString()
+    {
+        return (string) $this->render();
     }
 }

@@ -1,0 +1,7 @@
+<aside>
+	<ul>
+		{% for menuItem in menu.menuItems %}
+		<li><a href="{{ menuItem.link }}">{{ menuItem.title }}</a></li>
+		{% endfor %}
+	</ul>
+</aside>

@@ -48,6 +48,13 @@ class MenusTest extends TestCase
         $this->assertNotEmpty($menu->menuItems->first()->menuItems);
     }
 
+    public function testRendering()
+    {
+        list($menu) = $this->createMenuWithMenuItem();
+
+        $this->assertContains('<a href="https://github.com">My item</a>', (string) $menu->render());
+    }
+
     protected function createMenuWithMenuItem() : array
     {
         $menu = $this->createMenu();
