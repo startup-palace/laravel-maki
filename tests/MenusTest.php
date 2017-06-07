@@ -50,9 +50,23 @@ class MenusTest extends TestCase
 
     public function testRendering()
     {
-        list($menu) = $this->createMenuWithMenuItem();
+        list($menu, $menuItem) = $this->createMenuWithMenuItem();
 
         $this->assertContains('<a href="https://github.com">My item</a>', (string) $menu->render());
+
+        $link = Link::create([
+            'text' => 'A link',
+            'title' => 'A link',
+            'url' => 'https://github.com/startup-palace',
+        ]);
+
+        $subItem = $this->newMenuItem($link, 'Github');
+        $subItem->parent()->associate($menuItem);
+        $subItem->save();
+
+        $menu->refresh();
+
+        $this->assertContains('<a href="https://github.com/startup-palace">My item</a>', (string) $menu->render());
     }
 
     protected function createMenuWithMenuItem() : array

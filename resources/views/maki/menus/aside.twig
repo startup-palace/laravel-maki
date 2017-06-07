@@ -1,7 +1,18 @@
 <aside>
 	<ul>
 		{% for menuItem in menu.menuItems %}
-		<li><a href="{{ menuItem.link }}">{{ menuItem.title }}</a></li>
+		<li>
+			{% if menuItem.menuItems.isNotEmpty() %}
+			<a href="#">{{ menuItem.title }}</a>
+			<ul>
+				{% for subItem in menuItem.menuItems %}
+				<li><a href="{{ subItem.link }}">{{ subItem.title }}</a></li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<a href="{{ menuItem.link }}">{{ menuItem.title }}</a>
+			{% endif %}
+		</li>
 		{% endfor %}
 	</ul>
 </aside>
