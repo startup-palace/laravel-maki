@@ -106,7 +106,7 @@ class MenusTest extends TestCase
     protected function newMenuItem(Link $link, $title, MenuItem $parent = null) : MenuItem
     {
         return new MenuItem([
-            'title' => 'My item',
+            'title' => $title,
             'link_id' => $link->id,
         ]);
     }
