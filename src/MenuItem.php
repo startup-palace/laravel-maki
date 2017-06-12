@@ -47,4 +47,17 @@ class MenuItem extends Model implements MenuItemInterface
     {
         return $this->belongsTo(app(LinkInterface::class));
     }
+
+    /**
+     * Get the menu item's title, depending on its type (link or sub-menu)
+     * @return string
+     */
+    public function getTitleAttribute() : string
+    {
+        if (empty($this->attributes['title']) && $this->link) {
+            return $this->link->text;
+        }
+
+        return $this->attributes['title'];
+    }
 }

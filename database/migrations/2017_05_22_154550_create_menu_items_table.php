@@ -10,7 +10,7 @@ class CreateMenuItemsTable extends Migration
         Schema::create('maki_menu_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->string('title');
+            $table->string('title')->default('');
             $table->uuid('link_id')->nullable();
 
             $table->uuid('parent_id')->nullable();

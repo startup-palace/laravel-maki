@@ -52,7 +52,7 @@ class MenusTest extends TestCase
     {
         list($menu, $menuItem) = $this->createMenuWithMenuItem();
 
-        $this->assertContains('<a href="https://github.com">My item</a>', (string) $menu->render());
+        $this->assertContains('<a href="https://github.com">A link</a>', (string) $menu->render());
 
         $link = Link::create([
             'text' => 'A link',
@@ -66,7 +66,7 @@ class MenusTest extends TestCase
 
         $menu->refresh();
 
-        $this->assertContains('<a href="https://github.com/startup-palace">My item</a>', (string) $menu->render());
+        $this->assertContains('<a href="https://github.com/startup-palace">Github</a>', (string) $menu->render());
     }
 
     protected function createMenuWithMenuItem() : array
@@ -79,7 +79,7 @@ class MenusTest extends TestCase
             'url' => 'https://github.com',
         ]);
 
-        $menuItem = $this->newMenuItem($link, 'My item');
+        $menuItem = $this->newMenuItem($link);
         $menuItem->parent()->associate($menu);
         $menuItem->save();
 
@@ -104,10 +104,10 @@ class MenusTest extends TestCase
         ]);
     }
 
-    protected function newMenuItem(Link $link, $title, MenuItem $parent = null) : MenuItem
+    protected function newMenuItem(Link $link, $title = '', MenuItem $parent = null) : MenuItem
     {
         return new MenuItem([
-            'title' => 'My item',
+            'title' => $title,
             'link_id' => $link->id,
         ]);
     }
