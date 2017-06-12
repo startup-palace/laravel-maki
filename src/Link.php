@@ -42,6 +42,19 @@ class Link extends Model implements LinkInterface
     }
 
     /**
+     * Get the link's title (defaults to link's text)
+     * @return string
+     */
+    public function getTitleAttribute() : string
+    {
+        if (empty($this->attributes['title'])) {
+            return $this->text;
+        }
+
+        return $this->attributes['title'];
+    }
+
+    /**
      * Render the HTML code for the link
      * @param  array  $options Options for the link
      * @return string

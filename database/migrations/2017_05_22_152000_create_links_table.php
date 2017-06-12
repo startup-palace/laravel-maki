@@ -10,7 +10,7 @@ class CreateLinksTable extends Migration
         Schema::create('maki_links', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->timestamps();
-            $table->string('text');
+            $table->string('text')->default('');
             $table->string('title')->default('');
             $table->uuid('object_id')->nullable();
             $table->string('object_type')->nullable();
