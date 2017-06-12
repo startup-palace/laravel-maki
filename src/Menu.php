@@ -18,7 +18,7 @@ class Menu extends Model implements MenuInterface
     protected $table = 'maki_menus';
 
     protected $fillable = [
-        'title', 'description', 'type',
+        'title', 'slug', 'description', 'type',
     ];
 
     /**

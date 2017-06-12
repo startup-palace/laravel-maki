@@ -11,6 +11,7 @@ class CreateMenusTable extends Migration
             $table->uuid('id')->primary();
             $table->timestamps();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('description');
             $table->string('type');
         });

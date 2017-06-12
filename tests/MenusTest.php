@@ -98,6 +98,7 @@ class MenusTest extends TestCase
     {
         return new Menu([
             'title' => 'My menu',
+            'slug' => 'my-menu',
             'description' => 'The description of my menu',
             'type' => 'aside',
         ]);
