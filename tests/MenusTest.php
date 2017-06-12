@@ -66,7 +66,7 @@ class MenusTest extends TestCase
 
         $menu->refresh();
 
-        $this->assertContains('<a href="https://github.com/startup-palace">My item</a>', (string) $menu->render());
+        $this->assertContains('<a href="https://github.com/startup-palace">Github</a>', (string) $menu->render());
     }
 
     protected function createMenuWithMenuItem() : array
