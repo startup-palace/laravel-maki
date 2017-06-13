@@ -25,7 +25,7 @@ trait MakiEntityTrait
                 ->where('object_id', $this->id);
         })->pluck('id')->toArray();
 
-        $bindingsString = null;
+        $bindingsString = 'null';
 
         if (count($childless)) {
             $bindingsString = trim( str_repeat('?,', count($childless)), ',');
