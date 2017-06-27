@@ -49,4 +49,21 @@ class LinksTest extends TestCase
             $link->render(['class' => ['btn btn-success']])
         );
     }
+
+    public function testCategoryLinkHtmlRendering()
+    {
+        $category = $this->newCategory();
+
+        $link = new Link([
+            'text' => 'The content of the link tag',
+            'title' => 'The title attribute',
+        ]);
+
+        $link->setRelation('object', $category);
+
+        $this->assertEquals(
+            "<a href=\"{$link->href}\" class=\"\" title=\"{$link->title}\" target=\"_self\">{$link->text}</a>",
+            $link->render()
+        );
+    }
 }
