@@ -80,6 +80,10 @@ class Section extends Model implements SectionInterface, Htmlable
     {
         $view = $this->getTemplateName();
 
+        if ($page && $callback = $this->getConfig('renderCallback')) {
+            $page->applyContextUpdate($callback);
+        }
+
         $content = new HtmlString(
             View::make($view, [
                 'fields' => $this->fields,
@@ -91,10 +95,6 @@ class Section extends Model implements SectionInterface, Htmlable
 
         if ($page) {
             $page->refreshContext($this);
-
-            if ($callback = $this->getConfig('renderCallback')) {
-                $page->applyContextUpdate($callback);
-            }
         }
 
         return $content;
