@@ -40,13 +40,32 @@ class LinksTest extends TestCase
         ]);
 
         $this->assertEquals(
-            "<a href=\"{$link->href}\" class=\"\" title=\"{$link->title}\">{$link->text}</a>",
+            "<a href=\"{$link->href}\" class=\"\" title=\"{$link->title}\" target=\"_blank\">{$link->text}</a>",
             $link->render()
         );
 
-        $this->assertEquals(
-            "<a href=\"{$link->href}\" class=\"btn btn-success\" title=\"{$link->title}\">{$link->text}</a>",
+        $this->assertEquals(<<<EOT
+<a href="{$link->href}" class="btn btn-success" title="{$link->title}" target="_blank">{$link->text}</a>
+EOT
+            ,
             $link->render(['class' => ['btn btn-success']])
+        );
+    }
+
+    public function testCategoryLinkHtmlRendering()
+    {
+        $category = $this->newCategory();
+
+        $link = new Link([
+            'text' => 'The content of the link tag',
+            'title' => 'The title attribute',
+        ]);
+
+        $link->setRelation('object', $category);
+
+        $this->assertEquals(
+            "<a href=\"{$link->href}\" class=\"\" title=\"{$link->title}\" target=\"_self\">{$link->text}</a>",
+            $link->render()
         );
     }
 }

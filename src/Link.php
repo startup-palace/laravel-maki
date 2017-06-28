@@ -67,7 +67,16 @@ class Link extends Model implements LinkInterface
             $class = is_string($options['class']) ? $options : implode(' ', $options['class']);
         }
 
-        return sprintf('<a href="%s" class="%s" title="%s">%s</a>', $this->href, $class, $this->title, $this->text);
+        if ($this->url && !preg_match('/^\//', $this->url)) {
+            $target = '_blank';
+        } else {
+            $target = array_get($options, 'target', '_self');
+        }
+
+        return sprintf(
+            '<a href="%s" class="%s" title="%s" target="%s">%s</a>',
+            $this->href, $class, $this->title, $target, $this->text
+        );
     }
 
     /**
