@@ -40,30 +40,24 @@ class LinksTest extends TestCase
         ]);
 
         $this->assertEquals(
-            "<a href=\"{$link->href}\" class=\"\" title=\"{$link->title}\" target=\"_blank\">{$link->text}</a>",
+            '<a href="https://github.com" class="" title="The title attribute" target="_blank">The content of the link tag</a>',
             $link->render()
         );
 
-        $this->assertEquals(<<<EOT
-<a href="{$link->href}" class="btn btn-success" title="The title attribute" target="_blank">The content of the link tag</a>
-EOT
-            ,
+        $this->assertEquals(
+            '<a href="https://github.com" class="btn btn-success" title="The title attribute" target="_blank">The content of the link tag</a>',
             $link->render(['class' => ['btn btn-success']])
         );
 
         $link->url = '//github.com';
-        $this->assertEquals(<<<EOT
-<a href="//github.com" class="btn btn-success" title="The title attribute" target="_blank">The content of the link tag</a>
-EOT
-            ,
+        $this->assertEquals(
+            '<a href="//github.com" class="btn btn-success" title="The title attribute" target="_blank">The content of the link tag</a>',
             $link->render(['class' => ['btn btn-success']])
         );
 
         $link->url = '/a-page';
-        $this->assertEquals(<<<EOT
-<a href="/a-page" class="btn btn-success" title="The title attribute" target="_self">The content of the link tag</a>
-EOT
-            ,
+        $this->assertEquals(
+            '<a href="/a-page" class="btn btn-success" title="The title attribute" target="_self">The content of the link tag</a>',
             $link->render(['class' => ['btn btn-success']])
         );
     }
